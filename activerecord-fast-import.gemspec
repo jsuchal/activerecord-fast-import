@@ -25,6 +25,8 @@ Gem::Specification.new do |s|
      "VERSION",
      "activerecord-fast-import.gemspec",
      "lib/activerecord-fast-import.rb",
+     "nbproject/project.properties",
+     "nbproject/project.xml",
      "spec/activerecord-fast-import_spec.rb",
      "spec/spec_helper.rb"
   ]
