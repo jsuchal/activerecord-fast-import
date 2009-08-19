@@ -1,4 +1,4 @@
-module ActiveRecord
+module ActiveRecord #:nodoc:
   class Base
     # Deletes all rows in table very fast, but without calling +destroy+ method
     # nor any hooks.
@@ -21,7 +21,7 @@ module ActiveRecord
     #
     # ==== Parameters
     # * +file+ the file to load
-    # * +options+ (see <tt>load_data_infile?</tt>)
+    # * +options+ (see <tt>load_data_infile</tt>)
     def self.fast_import(file, options = {})
       disable_keys
       load_data_infile(file, options)

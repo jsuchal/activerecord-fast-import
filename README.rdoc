@@ -1,5 +1,0 @@
-= activerecord-fast-import
-
-== Copyright
-
-Copyright (c) 2009 Jan Suchal. See LICENSE for details.
