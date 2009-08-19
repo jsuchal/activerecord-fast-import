@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jan Suchal"]
   s.date = %q{2009-08-19}
-  s.description = %q{TODO: longer description of your gem}
+  s.description = %q{Native MySQL additions to ActiveRecord, like LOAD DATA INFILE, ENABLE/DISABLE KEYS, TRUNCATE TABLE.}
   s.email = %q{johno@jsmf.net}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Fast MySQL import for ActiveRecord}
   s.test_files = [
     "spec/activerecord-fast-import_spec.rb",
      "spec/spec_helper.rb"
@@ -47,10 +47,13 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 2.1.2"])
     else
       s.add_dependency(%q<rspec>, [">= 0"])
+      s.add_dependency(%q<activerecord>, [">= 2.1.2"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 0"])
+    s.add_dependency(%q<activerecord>, [">= 2.1.2"])
   end
 end
