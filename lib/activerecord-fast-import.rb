@@ -20,19 +20,20 @@ module ActiveRecord #:nodoc:
     # key updates for even faster import speed
     #
     # ==== Parameters
-    # * +file+ the file to load
+    # * +file+ file(s) to import
     # * +options+ (see <tt>load_data_infile</tt>)
-    def self.fast_import(file, options = {})
-      disable_keys
-      load_data_infile(file, options)
+    def self.fast_import(files, options = {})
+      files = [files] unless files.is_a? Array
       enable_keys
+      files.each {|file| load_data_infile(file, options)}
+      disable_keys
     end
 
     # Loads data from file using MySQL native LOAD DATA INFILE query
     #
     # ==== Parameters
     # * +file+ the file to import
-    # * +options+
+    # * +options+ 
     def self.load_data_infile(file, options = {})
       sql = "LOAD DATA LOCAL INFILE '#{file}' INTO TABLE #{quoted_table_name} "
       sql << "FIELDS TERMINATED BY '#{options[:fields_terminated_by]}' " if options[:fields_terminated_by]
