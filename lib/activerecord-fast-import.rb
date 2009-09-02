@@ -24,9 +24,9 @@ module ActiveRecord #:nodoc:
     # * +options+ (see <tt>load_data_infile</tt>)
     def self.fast_import(files, options = {})
       files = [files] unless files.is_a? Array
-      enable_keys
-      files.each {|file| load_data_infile(file, options)}
       disable_keys
+      files.each {|file| load_data_infile(file, options)}
+      enable_keys
     end
 
     # Loads data from file using MySQL native LOAD DATA INFILE query
