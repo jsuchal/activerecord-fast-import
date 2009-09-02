@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{activerecord-fast-import}
-  s.version = "0.1.2"
+  s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jan Suchal"]
-  s.date = %q{2009-08-21}
+  s.date = %q{2009-09-02}
   s.description = %q{Native MySQL additions to ActiveRecord, like LOAD DATA INFILE, ENABLE/DISABLE KEYS, TRUNCATE TABLE.}
   s.email = %q{johno@jsmf.net}
   s.extra_rdoc_files = [
