@@ -16,6 +16,13 @@ module ActiveRecord #:nodoc:
       connection.execute("ALTER TABLE #{quoted_table_name} ENABLE KEYS")
     end
 
+    # Disables keys, yields block, enables keys.
+    def self.with_keys_disabled
+      disable_keys
+      yield
+      enable_keys
+    end
+
     # Loads data from file using MySQL native LOAD DATA INFILE query, disabling
     # key updates for even faster import speed
     #
@@ -24,9 +31,9 @@ module ActiveRecord #:nodoc:
     # * +options+ (see <tt>load_data_infile</tt>)
     def self.fast_import(files, options = {})
       files = [files] unless files.is_a? Array
-      disable_keys
-      files.each {|file| load_data_infile(file, options)}
-      enable_keys
+      with_keys_disabled do
+        files.each {|file| load_data_infile(file, options)}
+      end
     end
 
     # Loads data from file using MySQL native LOAD DATA INFILE query
