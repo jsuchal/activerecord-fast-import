@@ -23,16 +23,23 @@ module ActiveRecord #:nodoc:
       enable_keys
     end
 
-    # Loads data from file using MySQL native LOAD DATA INFILE query, disabling
+    # Loads data from file(s) using MySQL native LOAD DATA INFILE query, disabling
     # key updates for even faster import speed
     #
     # ==== Parameters
-    # * +file+ file(s) to import
+    # * +files+ file(s) to import
     # * +options+ (see <tt>load_data_infile</tt>)
     def self.fast_import(files, options = {})
       files = [files] unless files.is_a? Array
       with_keys_disabled do
-        files.each {|file| load_data_infile(file, options)}
+        load_data_infile_multiple(files, options)
+      end
+    end
+
+    # Loads data from multiple files using MySQL native LOAD DATA INFILE query
+    def self.load_data_infile_multiple(files, options = {})
+      files.each do |file|
+        load_data_infile(file, options)
       end
     end
 
