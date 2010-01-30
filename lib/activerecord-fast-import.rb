@@ -52,7 +52,7 @@ module ActiveRecord #:nodoc:
       sql = "LOAD DATA LOCAL INFILE '#{file}' "
       sql << "#{options[:insert_method]} " if options[:insert_method]
       sql << "INTO TABLE #{quoted_table_name} "
-      sql << "CHARACTER SET #{options[:charset_name]}" if options[:charset_name]
+      sql << "CHARACTER SET #{options[:charset_name]} " if options[:charset_name]
       
       fields = ""
       fields << "TERMINATED BY '#{options[:fields_terminated_by]}' " if options[:fields_terminated_by]
