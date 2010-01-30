@@ -61,6 +61,15 @@ We want to concatenate those two columns into one.
 
 Of course you can use any of those shiny [MySQL functions](http://dev.mysql.com/doc/refman/5.1/en/functions.html).
 
+### Extra features - added by Rafal Piekarski
+
+This version also provides other "LOAD DATA" features and they are fields in options hash:
+
+    :insert_method  # defines method for inserting data: IGNORE or REPLACE
+    :charset_name   # defines file charset
+    :fields_optionally_enclosed_by # allows you to define fields enclosure method
+    :fields_escaped_by # changes the escape character                     
+
 ## Copyright
 
 Copyright (c) 2009 Jan Suchal. See LICENSE for details.
