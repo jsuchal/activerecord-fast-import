@@ -53,9 +53,13 @@ module ActiveRecord #:nodoc:
       sql << "#{options[:insert_method]} " if options[:insert_method]
       sql << "INTO TABLE #{quoted_table_name} "
       sql << "CHARACTER SET #{options[:charset_name]}" if options[:charset_name]
-      sql << "FIELDS TERMINATED BY '#{options[:fields_terminated_by]}' " if options[:fields_terminated_by]
-      sql << "FIELDS OPTIONALLY ENCLOSED BY '#{options[:fields_optionally_enclosed_by]}' " if options[:fields_optionally_enclosed_by]
-      sql << "FIELDS ESCAPED BY '#{options[:fields_escaped_by]}' " if options[:fields_escaped_by]
+      
+      fields = ""
+      fields << "TERMINATED BY '#{options[:fields_terminated_by]}' " if options[:fields_terminated_by]
+      fields << "OPTIONALLY ENCLOSED BY '#{options[:fields_optionally_enclosed_by]}' " if options[:fields_optionally_enclosed_by]
+      fields << "ESCAPED BY '#{options[:fields_escaped_by]}' " if options[:fields_escaped_by]
+
+      sql << "FIELDS #{fields} " unless fields.empty?      
       sql << "LINES TERMINATED BY '#{options[:lines_terminated_by]}' " if options[:lines_terminated_by]
       sql << "IGNORE #{options[:ignore_lines]} LINES " if options[:ignore_lines]
       sql << "(" + options[:columns].join(', ') + ") " if options[:columns]
