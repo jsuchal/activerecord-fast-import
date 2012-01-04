@@ -55,12 +55,12 @@ module ActiveRecord #:nodoc:
       sql << "CHARACTER SET #{options[:charset_name]} " if options[:charset_name]
       
       fields = ""
-      fields << "TERMINATED BY '#{options[:fields_terminated_by]}' " if options[:fields_terminated_by]
+      fields << "TERMINATED BY #{structure_string options[:fields_terminated_by]} " if options[:fields_terminated_by]
       fields << "OPTIONALLY ENCLOSED BY '#{options[:fields_optionally_enclosed_by]}' " if options[:fields_optionally_enclosed_by]
       fields << "ESCAPED BY '#{options[:fields_escaped_by]}' " if options[:fields_escaped_by]
 
       sql << "FIELDS #{fields} " unless fields.empty?      
-      sql << "LINES TERMINATED BY '#{options[:lines_terminated_by]}' " if options[:lines_terminated_by]
+      sql << "LINES TERMINATED BY #{structure_string options[:lines_terminated_by]} " if options[:lines_terminated_by]
       sql << "IGNORE #{options[:ignore_lines]} LINES " if options[:ignore_lines]
       sql << "(" + options[:columns].join(', ') + ") " if options[:columns]
       if options[:mapping]
@@ -72,6 +72,16 @@ module ActiveRecord #:nodoc:
       end
       sql << ";"
       connection.execute(sql)
+    end
+
+    private
+
+    def self.structure_string(spec)
+      if spec.is_a? Fixnum
+        "0x%x" % spec
+      else
+        "'#{spec}'"
+      end
     end
   end
 end
